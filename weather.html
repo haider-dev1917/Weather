@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+   <div class="card">
+    <div class="search" style="width: 100%;  height: 40px;border: 1px solid white; border-radius: 20px;background-color: aliceblue; display: flex;align-items: center; ;">
+        <input type="search" placeholder="enter city name" style="border: none; background-color: transparent ;width: 80%; height: 100%;padding-left: 25px;outline: none;"id="inpt" >
+        <p><i class="fa-solid fa-magnifying-glass" style="font-size: 22px;color: rgb(18, 18, 24);cursor: pointer; " id="icon" ></i></p>
+    </div>
+    <div class="weather" >
+     <img src="rain.png" class="weather-icon">
+     <h1 class="tem">22°c</h1>
+     <h2 class="city">New York</h2>
+     <div class="detail">
+        <div class="col">
+            
+            <img src="humidity.png">
+            <div>
+                <p class="humidity">50%</p>
+                <p>Humidity</p>
+            </div>
+        </div>
+        <div class="col">
+            
+            <img src="wind.png">
+            <div>
+                <p class="wind">15 km/h</p>
+                <p>wind speed</p>
+            </div>
+        </div>
+
+
+     </div>
+     
+     
+    </div>
+
+   </div>
+
+<script src="weather.js"></script>
+<script>
+    const apikey="53e71a0557c60a20523665adeb6e6634";
+    const apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+    const searchbox=document.querySelector("#inpt");
+    const searchicon=document.querySelector("#icon");
+    const weathericon=document.querySelector(".weather-icon")
+
+
+    async function chkweather(city){
+        const response=await fetch(apiurl+ city +`&appid=${apikey}`);
+        
+        if(response.status==404){
+            document.querySelector(".weather").style.display="none"
+            alert("spelling mistake")
+            
+        }
+        else{
+            document.querySelector(".weather").style.display="block"
+        }
+        var data=await response.json();
+        
+        document.querySelector(".city").innerHTML=data.name;
+        document.querySelector(".tem").innerHTML=Math.round(data.main.temp) + "0°c";
+        document.querySelector(".humidity").innerHTML=data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML=data.wind.speed + " km/h";
+
+        if(data.weather[0].main=="Cloud"){
+            weathericon.src="clouds.png"
+        }
+        else if(data.weather[0].main=="Clear"){
+            weathericon.src="clear.png"
+        }
+       else if(data.weather[0].main=="Rain"){
+            weathericon.src="C:\Users\hp\Desktop\html\javascript\rain.png"
+        }
+        else if(data.weather[0].main=="Mist"){
+            weathericon.src="C:\Users\hp\Desktop\html\javascript\mist.png"
+        }
+        
+    }
+    
+    searchicon.addEventListener("click" ,()=>{
+        chkweather(searchbox.value);
+    })
+</script>
+    
+</body>
+</html>

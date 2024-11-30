@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background-color: #222;
+}
+.card{
+    width: 90%;
+    max-width: 440px;
+    min-height: 425px;
+    background: linear-gradient(135deg,#00feba,#5b548a);
+    color: #fff;
+    margin: 50px auto ;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+}
+.weather-icon{
+    width: 170px;
+    margin-top: 30px;
+}
+.weather h1{
+    font-weight: 500px;
+}
+.detail{
+    display: flex;
+    justify-content: space-between;
+   padding: 0 20px;
+    margin-top: 50px;
+}
+.col{
+    display: flex;
+    align-items: center;
+}
+.col img{
+    width: 40px;
+    margin-right: 10px;
+}
+.humidity, .wind{
+    font-size: 28px;
+    margin-top: -6px;
+}
+ 
+@media screen and (min-width: 375px) and (max-width:600px){
+
+    .weather-icon{
+        width: 100px;
+        margin-top: 0px;}
+    .detail{
+        padding: 0;
+    }
+    .col img{
+        width: 30px;
+    }
+    .humidity, .wind{
+        font-size: 25px;
+        margin-top: -6px;
+    }
+
+}
+@media screen and (min-width: 760px) and (max-width:1030px){
+    .weather-icon{
+        margin-top: 10px;}
+        .card{
+            margin-top: 30px;
+        }
+}
+
+
+    
